@@ -1,0 +1,240 @@
+/* ============================================================
+   estilos.css · Préstamos del laboratorio
+   Estilos propios. Se cargan después de Bootstrap,
+   por eso tienen prioridad sobre sus reglas.
+   ============================================================ */
+
+/*
+  * (selector universal): aplica la regla a TODOS los elementos.
+  box-sizing: border-box hace que el ancho incluya el padding y el borde.
+  Así, un input con width: 100% no se sale de su contenedor.
+*/
+* {
+  box-sizing: border-box;
+}
+
+/* body: estilos generales de toda la página. */
+body {
+  /* Usa la fuente del sistema operativo; si no existe, cualquier sans-serif. */
+  font-family: system-ui, sans-serif;
+  /* Quita el margen que el navegador pone por defecto alrededor de la página. */
+  margin: 0;
+  /* Color del texto: azul muy oscuro (más suave que el negro puro). */
+  color: #172536;
+  /* Color de fondo: gris azulado muy claro. */
+  background: #f3f6fa;
+}
+
+/*
+  Selector de grupo: la coma aplica la misma regla a header, main y footer.
+  Limita el ancho y centra el contenido en pantallas grandes.
+*/
+header,
+main,
+footer {
+  /* Ancho máximo de 960 px; en pantallas más chicas ocupa todo el ancho. */
+  max-width: 960px;
+  /* margin: auto centra el bloque horizontalmente. */
+  margin: auto;
+  /* Espacio interno de 24 px en los cuatro lados. */
+  padding: 24px;
+}
+
+/* header: franja superior en azul oscuro con texto blanco. */
+header {
+  background: #163c59;
+  color: white;
+}
+
+/*
+  nav: el menú usa Flexbox.
+  display: flex coloca los enlaces uno al lado del otro.
+  flex-wrap: wrap los baja a otra línea si no caben (celulares).
+  gap: 16px deja una separación entre enlaces.
+*/
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/*
+  Selector descendiente: solo los enlaces (a) que están DENTRO de header.
+  Por defecto los enlaces son azules; sobre fondo azul no se leerían.
+*/
+header a {
+  color: white;
+}
+
+/* section: cada sección se ve como una "tarjeta" blanca. */
+section {
+  /* 20 px arriba y abajo, 0 a los lados: separa una tarjeta de otra. */
+  margin: 20px 0;
+  /* Espacio interno de la tarjeta. */
+  padding: 20px;
+  /* Fondo blanco que contrasta con el gris del body. */
+  background: white;
+  /* Esquinas redondeadas. */
+  border-radius: 8px;
+}
+
+/*
+  label: normalmente es un elemento en línea.
+  display: block hace que cada etiqueta ocupe su propia línea.
+*/
+label {
+  display: block;
+  /* 10 px arriba y abajo para separar un campo de otro. */
+  margin: 10px 0;
+}
+
+/* Reglas comunes para los controles de formulario. */
+input,
+select,
+button {
+  /* Los controles no heredan la fuente del body por defecto; inherit la copia. */
+  font: inherit;
+  /* Espacio interno: controles más cómodos de tocar en celular. */
+  padding: 10px;
+  /* Nunca más anchos que su contenedor (evita el desplazamiento horizontal, RNF01). */
+  max-width: 100%;
+}
+
+/*
+  Cajas de texto y listas desplegables:
+  ocupan todo el ancho disponible y tienen un borde gris visible.
+  select todavía no se usa; queda listo para prácticas posteriores.
+*/
+input,
+select {
+  width: 100%;
+  /* Borde de 1 px, línea continua, color gris azulado. */
+  border: 1px solid #687889;
+}
+
+/* button: separación y cursor de mano al pasar el mouse. */
+button {
+  margin: 6px;
+  cursor: pointer;
+}
+
+/*
+  :focus-visible es una pseudoclase: se activa cuando el elemento
+  recibe el foco con el teclado (tecla Tab).
+  Dibuja un contorno naranja para que se sepa dónde está el usuario.
+  Ayuda a quien navega sin mouse (accesibilidad).
+*/
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #d68a00;
+}
+
+/* li: cada elemento de las listas (préstamos y requerimientos). */
+li {
+  /* Separación entre elementos. */
+  margin-bottom: 12px;
+  /* Corta palabras muy largas para que no se salgan de la pantalla. */
+  overflow-wrap: anywhere;
+}
+
+/*
+  .campos: selector de CLASE (lleva punto). Aplica al div class="campos".
+  Usa CSS Grid para acomodar Material y Alumno en dos columnas.
+*/
+.campos {
+  display: grid;
+  /* Dos columnas del mismo tamaño (1fr = una fracción del espacio). */
+  grid-template-columns: 1fr 1fr;
+  /* Separación entre columnas y filas. */
+  gap: 16px;
+}
+
+/*
+  #mensaje: selector de ID (lleva #). Aplica a <p id="mensaje">.
+  min-height reserva espacio aunque esté vacío, para que la página
+  no "brinque" cuando JavaScript escriba un mensaje.
+*/
+#mensaje {
+  min-height: 2em;
+  font-weight: bold;
+}
+
+/*
+  [hidden]: selector de ATRIBUTO. Aplica a cualquier elemento con el atributo hidden.
+  !important asegura que ninguna otra regla (por ejemplo, de Bootstrap)
+  lo vuelva a mostrar. JavaScript usará hidden para ocultar y mostrar elementos.
+*/
+[hidden] {
+  display: none !important;
+}
+
+/*
+  @media: consulta de medios (diseño adaptable, RNF01).
+  Estas reglas solo se aplican cuando la pantalla mide 600 px o menos (celulares).
+*/
+@media (max-width: 600px) {
+
+  /* Los campos pasan de dos columnas a una sola. */
+  .campos {
+    grid-template-columns: 1fr;
+  }
+
+  /* Menos espacio interno para aprovechar la pantalla pequeña. */
+  header,
+  main,
+  footer {
+    padding: 12px;
+  }
+}
+
+/* ============================================================
+   NUEVO (Actividad 7) · Mensajes que escribe app.js
+   ============================================================ */
+.ok {
+  color: #1d6b37;
+  /* verde: préstamo guardado */
+}
+
+.error {
+  color: #b3261e;
+  /* rojo: faltan datos */
+}
+
+/* NUEVO (Actividad 7) · Filas de la lista de préstamos */
+#registros {
+  padding-left: 0;
+  list-style: none;
+  /* sin viñetas: cada fila es una tarjeta */
+}
+
+#registros li {
+  display: flex;
+  flex-wrap: wrap;
+  /* en celular el estado baja de línea */
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #dde4ec;
+  border-left: 5px solid #d68a00;
+  border-radius: 6px;
+}
+
+.estado {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #fff4dc;
+  font-size: 0.9em;
+}
+
+/* ============================================================
+ NUEVO (Actividad 10) · Acceso del encargado
+ ============================================================ */
+#aviso-acceso {
+  min-height: 2em;
+  font-weight: bold;
+}
+
+/* El botón Salir se va al extremo derecho del menú. */
+#salir {
+  margin: 0 0 0 auto;
+}

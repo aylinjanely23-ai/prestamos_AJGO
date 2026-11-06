@@ -1,0 +1,19 @@
+# ============================================================
+# .gitignore · Préstamos del laboratorio
+# Actividad 9 · Lo que Git NO debe guardar en el repositorio
+# ============================================================
+
+# Dependencias que se descargan con npm (se pueden volver a instalar)
+node_modules/
+
+# Datos reales de la aplicación (en la Actividad 11 aquí vivirá prestamos.sqlite)
+datos/
+*.sqlite
+
+# Claves y contraseñas (nunca se suben)
+.env
+
+# Registros y archivos temporales del sistema
+*.log
+Thumbs.db
+.DS_Store

@@ -1,0 +1,194 @@
+<!doctype html>
+<!-- La línea anterior indica al navegador que el documento usa HTML moderno (HTML5). -->
+
+<!-- Inicia el documento. lang="es" indica que el contenido está en español. -->
+<html lang="es">
+
+<!-- Inicia la sección de configuración de la página (no se ve en pantalla). -->
+
+<head>
+
+  <!-- Permite mostrar correctamente acentos, la letra ñ y otros caracteres.
+       Debe ir primero dentro de head. -->
+  <meta charset="utf-8">
+
+  <!--
+    Configura la vista en dispositivos móviles:
+    width=device-width: usa el ancho real de la pantalla del dispositivo.
+    initial-scale=1: muestra la página sin zoom al abrirla.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Texto que aparece en la pestaña del navegador. -->
+  <title>Préstamos del laboratorio</title>
+
+  <!-- Carga Bootstrap, una hoja de estilos con clases ya hechas (btn, btn-primary, etc.).
+       Va primero para que nuestros estilos puedan modificarla. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+  <!-- Carga nuestros estilos. Al ir después, sus reglas tienen prioridad sobre Bootstrap. -->
+  <link rel="stylesheet" href="estilos.css">
+
+  <!-- Termina la sección de configuración. -->
+</head>
+
+<!-- Inicia el cuerpo: todo lo que el usuario ve en la página. -->
+
+<body>
+
+  <!-- Encabezado de la página: título, datos del grupo y menú. -->
+  <header>
+
+    <!-- h1: título principal de la página. Solo debe haber uno. -->
+    <h1>Préstamos del laboratorio</h1>
+
+    <!-- p: párrafo con el nombre del submódulo y el grupo. -->
+    <p>Construye aplicaciones web · 5AM PRG</p>
+
+    <!--
+      nav: agrupa los enlaces del menú principal.
+      aria-label="Principal": da nombre al menú para los lectores de pantalla;
+      no se ve en la página.
+    -->
+    <nav id="menu-principal" aria-label="Principal">
+
+      <!-- a: crea un enlace; href indica el destino.
+           #captura lleva directamente a la sección con id="captura". -->
+      <a href="index.html#captura">Registrar</a>
+
+      <!-- Lleva a la sección con id="lista". -->
+      <a href="index.html#lista">Consultar</a>
+
+      <!-- Abre otra página de la misma carpeta. -->
+      <a href="requerimientos.html">Requerimientos</a>
+
+      <!-- ACTIVIDAD 10: botón para cerrar la sesión del encargado.
+      hidden: empieza oculto; app.js lo muestra cuando hay sesión. -->
+      <button id="salir" type="button" class="btn btn-outline-light btn-sm" hidden>Salir</button>
+
+      <!-- Termina el menú. -->
+    </nav>
+
+    <!-- Termina el encabezado. -->
+  </header>
+
+  <!-- main: contenido principal de la página. Solo debe haber uno. -->
+  <main>
+    <!-- ACTIVIDAD 10: acceso del encargado (RF01).
+     Es lo único que se ve mientras NO hay sesión. -->
+    <section id="acceso">
+
+      <h2>Acceso del encargado</h2>
+
+      <!-- id="entrar": app.js escucha el submit de este formulario.
+       type="password": la clave se ve como puntos. -->
+      <form id="entrar">
+
+        <label>Clave del encargado <input name="clave" type="password" required autocomplete="current-
+         password"></label>
+
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+
+      <!-- Aquí app.js escribe "Clave incorrecta" o "Sesión cerrada". -->
+      <p id="aviso-acceso" role="status" aria-live="polite"></p>
+
+    </section>
+
+    <!--
+      section: agrupa un bloque de contenido relacionado.
+      id="captura": nombre único que usa el enlace "Registrar" del menú
+      y que después usará JavaScript.
+    -->
+    <!--<section id="captura">-->
+    <section id="captura" hidden>
+
+      <!-- h2: subtítulo de la sección (nivel inferior a h1). -->
+      <h2>Registrar préstamo</h2>
+
+      <!--
+        form: agrupa los campos que el usuario llena.
+        id="prestamo": nombre con el que app.js encuentra el formulario.
+      -->
+      <form id="prestamo">
+
+        <!-- div con clase "campos": en estilos.css acomoda los campos
+             en dos columnas, o en una sola en pantallas pequeñas. -->
+        <div class="campos">
+
+          <!--
+            label: etiqueta del campo; al envolver al input, un clic en el texto
+            activa el campo.
+            input: caja de texto (si no se indica type, es "text").
+            name="material": nombre con el que se identifica el dato.
+            required: no se puede dejar vacío.
+            minlength="2" / maxlength="60": entre 2 y 60 caracteres (RF02).
+          -->
+          <label>Material <input name="material" required minlength="2" maxlength="60"></label>
+
+          <!-- Campo para el nombre del alumno, con las mismas reglas. -->
+          <label>Alumno <input name="alumno" required minlength="2" maxlength="60"></label>
+
+          <!-- Termina el grupo de campos. -->
+        </div>
+
+        <!--
+          button: botón.
+          type="submit": envía el formulario y lanza el evento submit,
+          que app.js escucha (Actividad 7).
+          class="btn btn-primary": clases de Bootstrap que le dan forma y color azul.
+        -->
+        <button type="submit" class="btn btn-primary">Guardar préstamo</button>
+
+        <!-- Termina el formulario. -->
+      </form>
+
+      <!-- ACTIVIDAD 7 (corrección O1): el mensaje se movió aquí, debajo del botón,
+           porque al final de la página no se veía en el celular.
+           role="status" y aria-live="polite": los lectores de pantalla leen
+           el mensaje cuando cambia, sin interrumpir al usuario. -->
+      <p id="mensaje" role="status" aria-live="polite"></p>
+
+      <!-- Termina la sección de captura. -->
+    </section>
+
+    <!-- Sección de consulta. id="lista" es el destino del enlace "Consultar". -->
+    <!--<section id="lista">-->
+    <section id="lista" hidden>
+
+      <!-- Subtítulo de la sección. -->
+      <h2>Préstamos registrados</h2>
+
+      <!--
+        Campo de búsqueda.
+        type="search": caja pensada para buscar.
+        id="buscar": JavaScript lo usará después para filtrar la lista (RF03).
+        Por ahora es solo el esquema; se programará en la Actividad 13.
+      -->
+      <label>Buscar <input id="buscar" type="search"></label>
+
+      <!-- Párrafo vacío: JavaScript escribirá aquí el total de préstamos. -->
+      <p id="total"></p>
+
+      <!-- ul: lista vacía; JavaScript agregará un elemento li por cada préstamo. -->
+      <ul id="registros"></ul>
+
+      <!-- Termina la sección de consulta. -->
+    </section>
+
+    <!-- Termina el contenido principal. -->
+  </main>
+
+  <!-- footer: pie de página con el plantel y el aviso de que los datos son ficticios. -->
+  <footer>CBTis 200 · Datos ficticios para las prácticas</footer>
+
+  <!-- ACTIVIDAD 7: carga el programa JavaScript.
+       Va al final del body para que el formulario ya exista. -->
+  <script src="app.js"></script>
+
+  <!-- Termina el cuerpo. -->
+</body>
+
+<!-- Termina el documento HTML. -->
+
+</html>

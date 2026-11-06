@@ -1,0 +1,126 @@
+<!doctype html>
+<!-- La línea anterior indica al navegador que el documento usa HTML moderno (HTML5). -->
+
+<!-- Inicia el documento. lang="es" indica que el contenido está en español. -->
+<html lang="es">
+
+<!-- Inicia la sección de configuración de la página (no se ve en pantalla). -->
+<head>
+
+  <!-- Permite mostrar correctamente acentos, la letra ñ y otros caracteres.
+       Debe ir primero dentro de head. -->
+  <meta charset="utf-8">
+
+  <!--
+    Configura la vista en dispositivos móviles:
+    width=device-width: usa el ancho real de la pantalla del dispositivo.
+    initial-scale=1: muestra la página sin zoom al abrirla.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Texto de la pestaña. Es distinto al de index.html para saber en qué página estamos. -->
+  <title>Requerimientos · Préstamos del laboratorio</title>
+
+  <!-- Carga Bootstrap primero, para que nuestros estilos puedan modificarlo. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+  <!-- Carga nuestros estilos. Son los mismos de index.html,
+       así las dos páginas se ven iguales. -->
+  <link rel="stylesheet" href="estilos.css">
+
+<!-- Termina la sección de configuración. -->
+</head>
+
+<!-- Inicia el cuerpo: todo lo que el usuario ve en la página. -->
+<body>
+
+  <!-- main: contenido principal de la página. Solo debe haber uno. -->
+  <main>
+
+    <!-- h1: título principal de esta página. Solo debe haber uno. -->
+    <h1>Requerimientos del sistema de préstamos</h1>
+
+    <!-- Párrafo con el objetivo: qué problema resuelve el sistema. -->
+    <p>Objetivo: registrar préstamos de material y consultar su devolución.</p>
+
+    <!--
+      Párrafo con los usuarios y el alcance:
+      quién usa el sistema, quién recibe el préstamo y hasta dónde llega el proyecto.
+      El salto de línea en el código no se ve en la página:
+      el navegador lo muestra como un solo párrafo.
+    -->
+    <p>Usuario operativo: encargado del laboratorio. Alumno: beneficiario,
+    sin cuenta de acceso. Alcance: un laboratorio y un encargado.</p>
+
+    <!-- h2: subtítulo para los requerimientos funcionales
+         (lo que el sistema debe HACER). -->
+    <h2>Requerimientos funcionales</h2>
+
+    <!--
+      ol: lista ordenada (numerada).
+      Se usa porque los requerimientos tienen un orden y una clave (RF01, RF02...).
+    -->
+    <ol>
+
+      <!-- li: cada elemento de la lista. -->
+      <li>RF01 Iniciar y cerrar sesión del encargado.</li>
+
+      <!-- En index.html, este requerimiento se cumple con minlength="2" y maxlength="60". -->
+      <li>RF02 Registrar material y alumno con 2 a 60 caracteres, sin espacios externos.</li>
+
+      <!-- En index.html corresponde al campo con id="buscar". -->
+      <li>RF03 Consultar préstamos y buscar por alumno o material.</li>
+
+      <li>RF04 Cambiar el estado de pendiente a devuelto y viceversa.</li>
+
+      <li>RF05 Eliminar únicamente el préstamo confirmado.</li>
+
+      <li>RF06 Conservar los registros después de reiniciar el servidor.</li>
+
+    <!-- Termina la lista ordenada. -->
+    </ol>
+
+    <!-- h2: subtítulo para los requerimientos no funcionales
+         (CÓMO debe funcionar: calidad, seguridad, rendimiento). -->
+    <h2>Requerimientos no funcionales</h2>
+
+    <!--
+      ul: lista sin numerar (con viñetas).
+      La clave RNF01, RNF02... ya identifica a cada elemento.
+    -->
+    <ul>
+
+      <!-- Diseño adaptable: se cumple con el viewport y el @media de estilos.css. -->
+      <li>RNF01 Usar la interfaz a 360 y 1280 píxeles sin desplazamiento horizontal.</li>
+
+      <!-- Seguridad: el servidor debe revisar los datos aunque el navegador ya los haya validado. -->
+      <li>RNF02 Rechazar operaciones de datos sin sesión y validar en el servidor.</li>
+
+      <!-- Publicación: conexión segura (HTTPS) y copias de respaldo. -->
+      <li>RNF03 Acceder por HTTPS en el dominio asignado y restaurar un respaldo.</li>
+
+    <!-- Termina la lista sin numerar. -->
+    </ul>
+
+    <!-- Párrafo con la entrevista modelo: las preguntas que se hacen al usuario
+         para descubrir los requerimientos. -->
+    <p>Entrevista modelo: ¿quién registra? El encargado. ¿Qué datos necesita?
+    Material y alumno. ¿Qué cambios realiza? Devolución o baja confirmada.</p>
+
+    <!-- Indicación para el equipo: hacer su propia entrevista con un usuario real. -->
+    <p>El equipo debe sustituir esta entrevista modelo por su consulta real.</p>
+
+    <!-- a: enlace para regresar a la página principal. -->
+    <a href="index.html">Volver a la aplicación</a>
+
+  <!-- Termina el contenido principal. -->
+  </main>
+
+  <!-- footer: pie de página. Es igual al de index.html para mantener la misma identidad. -->
+  <footer>CBTis 200 · Datos ficticios para las prácticas</footer>
+
+<!-- Termina el cuerpo. -->
+</body>
+
+<!-- Termina el documento HTML. -->
+</html>
