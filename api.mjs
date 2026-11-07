@@ -68,8 +68,15 @@ export async function atenderApi(peticion, respuesta, ruta) {
       });
     }
     // --- 4.4 GUARDAR y confirmar (201) ---
-    const prestamo = agregarPrestamo(material, alumno);
-    return enviarJSON(respuesta, 201, { prestamo: prestamo });
+    //const prestamo = agregarPrestamo(material, alumno);
+    //return enviarJSON(respuesta, 201, { prestamo: prestamo });
+    try {
+      const prestamo = agregarPrestamo(material, alumno);
+      return enviarJSON(respuesta, 201, { prestamo: prestamo });
+    } catch {
+      // Actividad 11: la base de datos también tiene reglas (CHECK) y puede rechazar el dato.
+      return enviarJSON(respuesta, 400, { error: 'La base de datos rechazó el préstamo.' });
+    }
   }
 
   // --- 4.5 RUTA DESCONOCIDA (404) ---
